@@ -69,7 +69,7 @@ function build() {
         var y = random(bottleYMin, bottleYMax);
         var bottle = createSprite(x, y);
         bottle.setCollider("rectangle", 0, 0, 20, 10);
-//        arrow.debug = true;
+//        bottle.debug = true;
         bottle.addAnimation("default", bottle_animation);
         bottle.velocity.x = -bottleSpeed - random(0, 1);
         bottles.add(bottle);

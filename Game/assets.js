@@ -39,6 +39,10 @@ var jumps = [
 ]; // array 
 var jumpSounds = []; // empty
 
+// bg music
+var bgMusic;
+var bgGame;
+
 function preload() {
     idle_sheet = loadSpriteSheet("sprites/main_character/freddy_idle2.png", 128, 128, 16);
     idle_animation = loadAnimation(idle_sheet);
@@ -46,7 +50,7 @@ function preload() {
     run_sheet = loadSpriteSheet("sprites/main_character/freddy_running2.png", 128, 128, 6);
     run_animation = loadAnimation(run_sheet);
 
-    jump_sheet = loadSpriteSheet("sprites/main_character/freddy_jumping3.png", 128, 128, 30);
+    jump_sheet = loadSpriteSheet("sprites/main_character/freddy_jumping3.png", 48, 108, 6);
     jump_animation = loadAnimation(jump_sheet);
 
     platform_img = loadImage("sprites/scenery/platform.png");
@@ -81,4 +85,5 @@ function preload() {
         var s = loadSound(jumps[i]);
         jumpSounds.push(s);
     }
+    
 }

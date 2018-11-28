@@ -72,7 +72,7 @@ function keyPressed() {
     if (keyCode == 13) {
         if (scene == "intro" || scene == "restart") {
             build();
-            //play sound to start game
+            
             startSound.play();
             scene = "game";
         }

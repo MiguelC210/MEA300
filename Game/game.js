@@ -26,7 +26,13 @@ function game() {
                 platform.remove();
             }
             platform.position.x = width + platform.width/2;
-            platform.position.y += random(-50, 50);
+            
+            // keep platforms above the bottom of the canvas
+            var y = platform.position.y;
+            y += random(-platformYChange, platformYChange);
+            y = min(y, platformMax);
+            platform.position.y = y;
+            
         }
     }
     
@@ -53,8 +59,8 @@ function game() {
         player.position.x -= 2;
     } 
     
-    else{
-        player.changeAnimation('idle');
+    else {
+        // player.changeAnimation('idle');
     }
     
 
@@ -104,7 +110,7 @@ function game() {
         }
     }
     
-    // wrap arrows back to the beginning 
+    // wrap bottles back to the beginning 
     for (var i = 0; i < bottles.length; i++) {
         if (bottles[i].position.x < -50) {
             bottles[i].position.x = random(width, width * 3);
@@ -132,6 +138,36 @@ function game() {
     }
 
 //    camera.position.y = player.position.y;
+    
+    /* tracking progress */
+    progress += 1;
+    if (progress == progressTotal) {
+        console.log('next level');
+        progress = 0;
+        
+        // increase platform distance
+        platformYChange += 20;
+        
+        // speed up platforms
+        platformSpeed += 0.2;
+        for (var i = 0; i < platforms.length; i++) {
+            platforms[i].velocity.x = -platformSpeed;
+        }
+        
+        level +=1;
+        if(level == levelCount) {
+            // add an bottle
+            var x = random(width, width * 3);
+            var y = random(bottleYMin, bottleYMax);
+            var bottle = createSprite(x, y);
+            bottle.setCollider("rectangle", 0, 0, 20, 10);
+            bottle.addAnimation("default", bottle_animation);
+            bottle.velocity.x = -bottleSpeed - random(0, 1);
+            bottles.add(bottle);
+            
+            level = 0;
+        }
+    }
     
     drawSprites();
     
